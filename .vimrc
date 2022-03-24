@@ -22,11 +22,22 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'valloric/youcompleteme'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:jedi#auto_close_doc = 0
 Plug 'cohama/lexima.vim'
 Plug 'weirongxu/coc-explorer'
+Plug 'scrooloose/nerdcommenter'
+
+""Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+
+""Notification
+Plug 'kristijanhusak/vim-simple-notifications'
 
 call plug#end()
-
 set background=dark
 colorscheme PaperColor
 
@@ -50,5 +61,11 @@ nmap <space>f <Cmd>FZF<CR>
 
 ""Autosave
 nmap <space>w <Cmd>w<CR>
+
+""Change Buffer Tabs
+map <F8> <Cmd>bprevious<CR>
+map <F9> <Cmd>bnext<CR>
+
+call notifications#info(['Main Config', 'Welcome Back to Vim! Happy Coding'])
 
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
