@@ -10,7 +10,7 @@ Plug 'vim-airline/vim-airline'
 Plug'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='distinguished'
+let g:airline_theme='fairyfloss'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 Plug 'prettier/vim-prettier'
@@ -44,6 +44,10 @@ Plug 'kristijanhusak/vim-simple-notifications'
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '│'
 
+""AutoFormat
+Plug 'chiel92/vim-autoformat'
+let g:python3_host_prog="/usr/bin/python3"
+au BufWrite * :Autoformat
 
 call plug#end()
 set background=dark
@@ -53,12 +57,12 @@ colorscheme PaperColor
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
   au InsertEnter,InsertChange *
-\ if v:insertmode == 'i' |
-\   silent execute '!echo -ne "\e[6 q"' | redraw! |
-\ elseif v:insertmode == 'r' |
-\   silent execute '!echo -ne "\e[4 q"' | redraw! |
-\ endif
-au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+        \ if v:insertmode == 'i' |
+        \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+        \ elseif v:insertmode == 'r' |
+        \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+        \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
 
@@ -75,6 +79,6 @@ nmap <space>w <Cmd>w<CR>
 map <F8> <Cmd>bprevious<CR>
 map <F9> <Cmd>bnext<CR>
 
-call notifications#info(['Main Config', 'Welcome Back to Vim! Happy Coding'])
+call notifications#info(['😀', 'Welcome!!'])
 
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
