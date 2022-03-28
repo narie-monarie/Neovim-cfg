@@ -1,0 +1,32 @@
+font:
+  # Normal (roman) font face
+  normal:
+    family: "Source Code Pro Semibold"
+    #style: Regular
+
+  # Bold font face
+  bold:
+    family: "Source Code Pro Semibold"
+    #style: Bold
+
+  # Italic font face
+  italic:
+    family: "Source Code Pro Semibold"
+    #style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: "Source Code Pro Semibold"
+    #style: Bold Italic
+
+  # Point size
+  size: 10
+cursor:
+  style:
+    shape: Block
+    blinking: On
+
+  unfocused_hollow: false
+
+## Live config reload
+live_config_reload: true
