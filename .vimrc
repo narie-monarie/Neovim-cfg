@@ -1,6 +1,7 @@
 set relativenumber
 set nu!
 syntax enable
+set fillchars=eob:\ 
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 call plug#begin()
@@ -17,25 +18,14 @@ Plug 'prettier/vim-prettier'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nlknguyen/papercolor-theme'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'kyoz/purify', { 'rtp': 'vim'  }
 
 
 ""Languages
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'valloric/youcompleteme'
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:jedi#auto_close_doc = 0
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'cohama/lexima.vim'
-Plug 'weirongxu/coc-explorer'
 Plug 'scrooloose/nerdcommenter'
-
-""Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
 
 ""Notification
 Plug 'kristijanhusak/vim-simple-notifications'
@@ -44,10 +34,12 @@ Plug 'kristijanhusak/vim-simple-notifications'
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '│'
 
-""AutoFormat
-Plug 'chiel92/vim-autoformat'
-let g:python3_host_prog="/usr/bin/python3"
-au BufWrite * :Autoformat
+""NerdTree
+Plug 'scrooloose/nerdtree'
+
+""Python Formatter
+Plug 'psf/black'
+
 
 call plug#end()
 set background=dark
@@ -65,9 +57,8 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
-
-""Explorer
-nmap <space>e <Cmd>CocCommand explorer<CR>
+""Enter complete
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
 
 ""Open FZF
 nmap <space>f <Cmd>FZF<CR>
@@ -81,4 +72,3 @@ map <F9> <Cmd>bnext<CR>
 
 call notifications#info(['😀', 'Welcome!!'])
 
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
