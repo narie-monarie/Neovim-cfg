@@ -21,8 +21,6 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'cocopon/iceberg.vim'
 Plug 'nanotech/jellybeans.vim'
 
-
-
 ""Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'cohama/lexima.vim'
