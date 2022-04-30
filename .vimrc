@@ -3,7 +3,7 @@ set number
 set relativenumber
 call plug#begin()
 
-""Looks
+""Looks and colorSchemes
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'wombat',
