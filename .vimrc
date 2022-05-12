@@ -1,13 +1,16 @@
 autocmd FileType apache setlocal commentstring=#\ %s
 set number
 set relativenumber
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum""]]
+set termguicolors
 call plug#begin()
 
-""Looks and colorSchemes
+""Looks
 Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
+    let g:lightline = {
+          \ 'colorscheme': 'spaceduck',
+          \ }
 set laststatus=2
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
@@ -16,24 +19,40 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'kyoz/purify', { 'rtp': 'vim'  }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'morhetz/gruvbox'
-Plug 'dracula/vim'
-Plug 'flazz/vim-colorschemes'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main'  }
+Plug 'ghifarit53/tokyonight-vim'
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'ghifarit53/tokyonight-vim'
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+Plug 'ayu-theme/ayu-vim'
+" enable true colors support
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main'  }
 
 ""Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'cohama/lexima.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'dracula/vim', { 'as': 'dracula'  }
+Plug 'omnisharp/omnisharp-vim'
 
 ""Indentation
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '│'
+
 call plug#end()
+
 syntax enable
 set fillchars=eob:\ 
 
 
 "set background=dark
-colorscheme purify
+colorscheme ayu
 
 ""Enter complete
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
