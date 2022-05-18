@@ -1,94 +1,82 @@
-autocmd FileType apache setlocal commentstring=#\ %s
-set number
+syntax on
+let &fillchars ..= ',eob: '
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 set relativenumber
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum""]]
-set termguicolors
+set nu!
 call plug#begin()
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
 
-""Looks
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" Using a non-default branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'tag': '*' }
+
+" Plugin options
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+Plug '~/my-prototype-plugin'
+
+"LightLine
 Plug 'itchyny/lightline.vim'
     let g:lightline = {
-          \ 'colorscheme': 'spaceduck',
+          \ 'colorscheme': 'gruvbox',
           \ }
 set laststatus=2
+
+"Rainbow Parentheses
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
+
+"Vim Motion
 Plug 'yuttie/comfortable-motion.vim'
+
+"Vim Devicons
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-Plug 'kyoz/purify', { 'rtp': 'vim'  }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main'  }
-Plug 'ghifarit53/tokyonight-vim'
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-Plug 'bluz71/vim-nightfly-guicolors'
-Plug 'ghifarit53/tokyonight-vim'
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-Plug 'ayu-theme/ayu-vim'
-" enable true colors support
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"
-Plug 'pineapplegiant/spaceduck', { 'branch': 'main'  }
 
-""Languages
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
-Plug 'cohama/lexima.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'dracula/vim', { 'as': 'dracula'  }
-Plug 'omnisharp/omnisharp-vim'
+"autoclose
+Plug 'townk/vim-autoclose'
 
-""Indentation
-Plug 'Yggdroot/indentLine'
-let g:indentLine_char = '│'
+"HTML close tag
+Plug 'alvan/vim-closetag'
+let g:closetag_regions = {
+	    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
 
+"Jsx
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
+"gruvbox
+Plug 'morhetz/gruvbox'
+let g:gruvbox_italic=1
+
+"linters
+Plug 'w0rp/ale'
+let b:ale_fixers = ['prettier', 'eslint']
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_fix_on_save = 1
 call plug#end()
 
-syntax enable
-set fillchars=eob:\ 
+set background=dark
+colorscheme gruvbox
 
-
-"set background=dark
-colorscheme ayu
-
-""Enter complete
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-
-""Open FZF
+"Open FZF
 nmap <space>f <Cmd>FZF<CR>
-
-""Autosave
-nmap <space>w <Cmd>w<CR>
-
-
-""Open NERDtree
-nmap <space>o <Cmd>NERDTree<CR>
-nmap <space>c <Cmd>NERDTreeClose<CR>
-
-
-
-""Change Buffer Tabs
-map <F8> <Cmd>bprevious<CR>
-map <F9> <Cmd>bnext<CR>
-
-
-augroup nerdtreehidetirslashes
-  autocmd!
-  autocmd FileType nerdtree syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
-augroup END
-
-augroup nerdtree
-  autocmd!
-  autocmd FileType nerdtree syntax clear NERDTreeFlags
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
-  autocmd FileType nerdtree setlocal conceallevel=3
-  autocmd FileType nerdtree setlocal concealcursor=nvic
-augroup END
-
-if exists("g:loaded_webdevicons")
-	call webdevicons#refresh()
-endif
