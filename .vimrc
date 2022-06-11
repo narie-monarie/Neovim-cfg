@@ -1,8 +1,6 @@
 set number
 set relativenumber
-autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
-autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
-autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
+
 call plug#begin()
 
 ""Looks
@@ -25,8 +23,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
 "colorscheme
 Plug 'morhetz/gruvbox'
-Plug 'mhinz/vim-startify'
-Plug 'knop-01/tortus'
 
 ""braces
 Plug 'jiangmiao/auto-pairs'
@@ -85,8 +81,6 @@ let g:indentLine_char = '│'
 Plug 'wakatime/vim-wakatime'
 
 call plug#end()
-
-
 "set mouse=a
 syntax on
 
@@ -126,4 +120,10 @@ endfunction
 inoremap <Tab> <C-R>=SuperCleverTab()<cr>
 
 " format the file
-noremap <F3> :%!astyle<CR> 
+noremap <F3> :%!astyle<CR>
+
+"Auto Start
+autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
+autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
+autocmd BufNewFile *.java 0r ~/.vim/templates/skeleton.java
