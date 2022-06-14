@@ -1,12 +1,21 @@
 set number
 set relativenumber
-
+" Important!!
+if has('termguicolors')
+	let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+	  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+	  set termguicolors
+endif
+" The configuration options should
+"be placed before `colorscheme edge`.
+let g:edge_style = 'aura'
+let g:edge_better_performance = 1"
 call plug#begin()
 
 ""Looks
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-	      \ 'colorscheme': 'gruvbox',
+	      \ 'colorscheme': 'dracula',
       \ }
 set laststatus=2
 Plug 'luochen1990/rainbow'
@@ -22,7 +31,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
 "colorscheme
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'sainnhe/edge'
 
 ""braces
 Plug 'jiangmiao/auto-pairs'
@@ -45,19 +55,14 @@ Plug 'rhysd/vim-clang-format'
 autocmd FileType c ClangFormatAutoEnable
 Plug 'bfrg/vim-cpp-modern'
 Plug 'alvan/vim-closetag'
-
-"Disable function highlighting (affects both C and C++ files)
 let g:cpp_function_highlight = 0
-
-"Enable highlighting of C++11 attributes
 let g:cpp_attributes_highlight = 1
-
-"Highlight struct/class member variables (affects both C and C++ files)
 let g:cpp_member_highlight = 1
-
-"Put all standard C and C++ keywords under Vim's highlight group 'Statement'
-"(affects both C and C++ files)
 let g:cpp_simple_highlight = 1
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
 
 "pretier Formatter
 Plug 'prettier/vim-prettier', {
@@ -82,11 +87,11 @@ Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 "set mouse=a
-syntax on
+syntax enable
 
-set fillchars=eob:\ 
+colorscheme edge
 set background=dark
-colorscheme gruvbox
+set fillchars=eob:\ 
 
 "Enter complete
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
