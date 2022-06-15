@@ -1,13 +1,13 @@
 set number
 set relativenumber
-" Important!!
+"This enables termgui without breaking vim colrs
 if has('termguicolors')
 	let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 	  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 	  set termguicolors
 endif
-" The configuration options should
-"be placed before `colorscheme edge`.
+
+"Colorscheme options
 let g:edge_style = 'aura'
 let g:edge_better_performance = 1"
 call plug#begin()
@@ -27,14 +27,14 @@ Plug 'yuttie/comfortable-motion.vim'
 "Dev Icons
 Plug 'ryanoasis/vim-devicons'
 
-"fzf	
+"fuzzy finder	
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
 "colorscheme
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'sainnhe/edge'
 
-""braces
+"braces
 Plug 'jiangmiao/auto-pairs'
 
 "css color
@@ -44,7 +44,7 @@ Plug 'ap/vim-css-color'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/git-messenger.vim'
 
-""Languages
+"Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'rust-lang/rust.vim'
 Plug 'mattn/emmet-vim'
