@@ -1,23 +1,23 @@
 set number
 set relativenumber
-"This enables termgui without breaking vim colrs
+set shortmess=I
+" Important!!
 if has('termguicolors')
 	let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 	  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 	  set termguicolors
 endif
-
-"Colorscheme options
+" The configuration options should
+"be placed before `colorscheme edge`.
 let g:edge_style = 'aura'
 let g:edge_better_performance = 1"
 call plug#begin()
 
 ""Looks
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-	      \ 'colorscheme': 'dracula',
-      \ }
-set laststatus=2
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
@@ -27,14 +27,21 @@ Plug 'yuttie/comfortable-motion.vim'
 "Dev Icons
 Plug 'ryanoasis/vim-devicons'
 
-"fuzzy finder	
+"fzf	
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 
 "colorscheme
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'sainnhe/edge'
+Plug 'nanotech/jellybeans.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'connorholyday/vim-snazzy'
+Plug 'jacoborus/tender.vim'
+Plug 'tomasiser/vim-code-dark'
+let g:codedark_italics = 1
 
-"braces
+""braces
 Plug 'jiangmiao/auto-pairs'
 
 "css color
@@ -44,7 +51,7 @@ Plug 'ap/vim-css-color'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/git-messenger.vim'
 
-"Languages
+""Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'rust-lang/rust.vim'
 Plug 'mattn/emmet-vim'
@@ -60,18 +67,21 @@ let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 let g:cpp_simple_highlight = 1
 Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-
-
+Plug 'valloric/matchtagalways'
+let g:mta_filetypes = {
+	    \ 'html' : 1,
+	    \ 'xhtml' : 1,
+	    \ 'xml' : 1,
+	    \ 'jinja' : 1,
+	    \}
 "pretier Formatter
-Plug 'prettier/vim-prettier', {
-			\ 'do': 'npm install',
-			\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] 
-			\}
-" when running at every change you may want to disable quickfix
-let g:prettier#quickfix_enabled = 0
-autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.svelte,*.yaml,*.html PrettierAsync
+Plug 'machakann/vim-highlightedyank'
+Plug 'jaxbot/semantic-highlight.vim'
+let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mapkts/enwise'
 
 "AutoCompletions
 Plug 'racer-rust/vim-racer'
@@ -86,13 +96,13 @@ let g:indentLine_char = '│'
 Plug 'wakatime/vim-wakatime'
 
 call plug#end()
+
 "set mouse=a
 syntax enable
 
-colorscheme edge
 set background=dark
 set fillchars=eob:\ 
-
+colorscheme edge
 "Enter complete
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
 
@@ -126,6 +136,9 @@ inoremap <Tab> <C-R>=SuperCleverTab()<cr>
 
 " format the file
 noremap <F3> :%!astyle<CR>
+
+"Coc Formatter
+noremap <F4> :CocCommand prettier.forceFormatDocument<CR>
 
 "Auto Start
 autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
