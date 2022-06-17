@@ -14,12 +14,12 @@ let g:edge_better_performance = 1"
 call plug#begin()
 
 ""Looks
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+Plug 'glepnir/spaceline.vim'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
+set laststatus=2
+let g:spaceline_seperate_style = 'none'
+let g:spaceline_colorscheme = 'dracula'
 
 ""smooth motion"
 Plug 'yuttie/comfortable-motion.vim'
@@ -66,6 +66,7 @@ let g:cpp_function_highlight = 0
 let g:cpp_attributes_highlight = 1
 let g:cpp_member_highlight = 1
 let g:cpp_simple_highlight = 1
+Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'valloric/matchtagalways'
@@ -136,10 +137,7 @@ inoremap <Tab> <C-R>=SuperCleverTab()<cr>
 
 " format the file
 noremap <F3> :%!astyle<CR>
-
-"Coc Formatter
 noremap <F4> :CocCommand prettier.forceFormatDocument<CR>
-
 "Auto Start
 autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
 autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
