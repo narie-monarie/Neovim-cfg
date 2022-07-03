@@ -20,6 +20,9 @@ let g:rainbow_active = 1
 set laststatus=2
 let g:spaceline_seperate_style = 'none'
 let g:spaceline_colorscheme = 'dracula'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+
 
 ""smooth motion"
 Plug 'yuttie/comfortable-motion.vim'
@@ -59,7 +62,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 Plug 'rhysd/vim-clang-format'
-autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
 Plug 'bfrg/vim-cpp-modern'
 Plug 'alvan/vim-closetag'
 let g:cpp_function_highlight = 0
@@ -83,6 +86,10 @@ let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,1
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mapkts/enwise'
+Plug 'leafOfTree/vim-svelte-plugin'
+let g:vim_svelte_plugin_load_full_syntax = 1
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 
 "AutoCompletions
 Plug 'racer-rust/vim-racer'
@@ -97,8 +104,8 @@ let g:indentLine_char = '│'
 Plug 'wakatime/vim-wakatime'
 
 call plug#end()
-
 "set mouse=a
+nmap <space>e <Cmd>NERDTreeToggle<CR>
 syntax enable
 
 set background=dark
@@ -116,8 +123,20 @@ nmap <space>f <Cmd>FZF<CR>
 nmap <space>w <Cmd>w<CR>
 
 
-" This can conflict with the default mappings provided by snipmate.
-" " See the after directory in .vim/bundle/snipMate/after
+""Remove in NERDTree
+let g:NERDTreeDirArrowExpandable = ' '
+let g:NERDTreeDirArrowCollapsible = ' '
+augroup nerdtreeconcealbrackets
+      autocmd!
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
+      autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
+      autocmd FileType nerdtree setlocal conceallevel=3
+      autocmd FileType nerdtree setlocal concealcursor=nvic
+augroup END
+let NERDTreeMinimalUI=1
+
+
+"SuperCleverTab
 function! SuperCleverTab()
 	if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
 		return "\<Tab>"
@@ -135,7 +154,7 @@ function! SuperCleverTab()
 endfunction
 inoremap <Tab> <C-R>=SuperCleverTab()<cr>
 
-" format the file
+"""format the file
 noremap <F3> :%!astyle<CR>
 noremap <F4> :CocCommand prettier.forceFormatDocument<CR>
 "Auto Start
