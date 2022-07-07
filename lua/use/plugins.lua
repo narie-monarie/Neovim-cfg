@@ -80,13 +80,7 @@ return packer.startup(function(use)
  use 'octol/vim-cpp-enhanced-highlight'
  use 'rhysd/vim-clang-format'
  use 'bfrg/vim-cpp-modern'
- vim.cmd([[
-  augroup ClangFormatAutoEnable
-    autocmd!
-    autocmd FileType cpp ClangFormatAutoEnable
-  augroup end
- ]])
- 
+
  -- Ruby --
  use 'vim-ruby/vim-ruby'
  use 'tpope/vim-rails'
@@ -108,6 +102,31 @@ return packer.startup(function(use)
  -- wakatime --
  use 'wakatime/vim-wakatime'
  
+ -- cmp plugins
+ use{
+  "hrsh7th/nvim-cmp"
+  } -- The completion plugin
+ use{
+  "hrsh7th/cmp-buffer"
+  } -- buffer completions
+ use{
+  "hrsh7th/cmp-path"
+  } -- path completions
+ use{
+  "saadparwaiz1/cmp_luasnip"
+  } -- snippet completions
+ use{
+  "hrsh7th/cmp-nvim-lsp"
+  }
+ use{ 
+ "hrsh7th/cmp-nvim-lua"
+ }
+
+ -- snippets
+ use({ "L3MON4D3/LuaSnip", commit = "79b2019c68a2ff5ae4d732d50746c901dd45603a" }) --snippet engine
+ use({ "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" }) -- a bunch of snippets to use
+	
+	
  -- BlankLine --
  use "lukas-reineke/indent-blankline.nvim"
  
@@ -124,10 +143,6 @@ return packer.startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
    vim.cmd([[nmap <space>t <Cmd>Telescope<CR>]])
-  
-  -- autocompletion framework --
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
   
  -- Example config in Luae
  vim.g.tokyonight_style = "night"

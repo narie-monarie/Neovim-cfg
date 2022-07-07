@@ -132,9 +132,7 @@ ins_left {
   color = { fg = colors.magenta, gui = 'bold' },
 }
 
-ins_left { 'location' }
 
-ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
 ins_left {
   'diagnostics',
@@ -154,28 +152,8 @@ ins_left {
     return '%='
   end,
 }
-
-ins_left {
-  -- Lsp server name .
-  function()
-    local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
-      end
-    end
-    return msg
-  end,
-  icon = ' LSP:',
-  color = { fg = '#ffffff', gui = 'bold' },
-}
-
+ins_right { 'location' }
+ins_right { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 -- Add components to right sections
 ins_right {
   'o:encoding', -- option component same as &encoding in viml
@@ -183,7 +161,6 @@ ins_right {
   cond = conditions.hide_in_width,
   color = { fg = colors.green, gui = 'bold' },
 }
-
 ins_right {
   'fileformat',
   fmt = string.upper,
@@ -208,7 +185,6 @@ ins_right {
   },
   cond = conditions.hide_in_width,
 }
-
 ins_right {
   function()
     return '▊'
@@ -216,6 +192,5 @@ ins_right {
   color = { fg = colors.blue },
   padding = { left = 1 },
 }
-
 -- Now don't forget to initialize lualine
 lualine.setup(config)
