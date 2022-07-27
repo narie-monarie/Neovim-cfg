@@ -52,29 +52,41 @@ return packer.startup(function(use)
  use 'neovim/nvim-lspconfig'
  use 'williamboman/nvim-lsp-installer'
  use 'jose-elias-alvarez/null-ls.nvim'
-  
+
  -- AutoPairs --
  use 'jiangmiao/auto-pairs'
  
- -- darkPlus --
- use 'martinsione/darkplus.nvim'
+ -- Highlight Enclosing Tags
+ use 'valloric/matchtagalways'
+
+ --AutoClose Tags HTMl
+ use 'alvan/vim-closetag'
+
+
+ --COLORSCHEMES
+ -- Oceanic Next --
+ use 'mhartington/oceanic-next' 
+ -- Challenger Deep
+ use 'challenger-deep-theme/vim'
+ -- deus
+ use 'ajmwagar/vim-deus'
+ -- hybrid
+ use 'w0ng/vim-hybrid'
+ -- molokai
+ use 'tomasr/molokai'
+ -- srcery
+ use 'srcery-colors/srcery-vim'
+
+
+ -- rainbow parentheses--
+ use 'luochen1990/rainbow'
  
- -- Tokyo Night --
- use 'folke/tokyonight.nvim'
- 
- -- using bufferline --
- use {
- 'akinsho/bufferline.nvim', tag = "v2.*", 
- requires = 'kyazdani42/nvim-web-devicons'
- }
- vim.opt.termguicolors = true
+ -- bufferline
+ use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
  require("bufferline").setup{}
- 
- -- Lua Line --
- use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
- }
+
+ --Feline--
+ use 'windwp/windline.nvim'
  
  -- ClangFormatAutoEnable
  use 'octol/vim-cpp-enhanced-highlight'
@@ -85,42 +97,27 @@ return packer.startup(function(use)
  use 'vim-ruby/vim-ruby'
  use 'tpope/vim-rails'
  
- -- C# --
- use 'OmniSharp/omnisharp-vim'
- use 'dense-analysis/ale'
- 
+ -- G0 --
+ use 'fatih/vim-go'
+
  -- TreeSitter --
- use {
- 'nvim-treesitter/nvim-treesitter'
- }
+ use 'nvim-treesitter/nvim-treesitter'
  
- -- FZF --
- use {'junegunn/fzf', run = ':call fzf#install()' }
- use {'junegunn/fzf.vim', depends = 'junegunn/fzf' }
- vim.cmd([[nmap <space>f <Cmd>FZF<CR>]])
- 
+ --Telescope FZF --
+ use {'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} }}
+ use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+ vim.cmd([[nmap <space>f <Cmd>Telescope find_files<CR>]])
+
  -- wakatime --
  use 'wakatime/vim-wakatime'
  
  -- cmp plugins
- use{
-  "hrsh7th/nvim-cmp"
-  } -- The completion plugin
- use{
-  "hrsh7th/cmp-buffer"
-  } -- buffer completions
- use{
-  "hrsh7th/cmp-path"
-  } -- path completions
- use{
-  "saadparwaiz1/cmp_luasnip"
-  } -- snippet completions
- use{
-  "hrsh7th/cmp-nvim-lsp"
-  }
- use{ 
- "hrsh7th/cmp-nvim-lua"
- }
+ use "hrsh7th/nvim-cmp" -- The completion plugin
+ use "hrsh7th/cmp-buffer"  -- buffer completions
+ use "hrsh7th/cmp-path" -- path completions
+ use "saadparwaiz1/cmp_luasnip" -- snippet completions
+ use "hrsh7th/cmp-nvim-lsp"
+ use "hrsh7th/cmp-nvim-lua"
 
  -- snippets
  use({ "L3MON4D3/LuaSnip", commit = "79b2019c68a2ff5ae4d732d50746c901dd45603a" }) --snippet engine
@@ -131,25 +128,13 @@ return packer.startup(function(use)
  use "lukas-reineke/indent-blankline.nvim"
  
  -- Basic cmds --
+ vim.opt.termguicolors = true
  vim.wo.fillchars='eob: '
  vim.opt.number = true
  vim.opt.relativenumber = true
  vim.o.background = "dark"
  vim.opt.list = true
  
- -- Telescope --
-  use { -- nice interface for LSP functions (among other things)
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-   vim.cmd([[nmap <space>t <Cmd>Telescope<CR>]])
-  
- -- Example config in Luae
- vim.g.tokyonight_style = "night"
- vim.g.tokyonight_italic_functions = true
- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
- vim.g.OmniSharp_server_stdio = 1
--- Change the "hint" color to the "orange" color, and make the "error" color bright red
- vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
- vim.cmd([[colorscheme tokyonight]])
+ 
+ vim.cmd([[colorscheme srcery]])
 end)
