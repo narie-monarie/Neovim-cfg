@@ -106,7 +106,7 @@ return packer.startup(function(use)
  --Telescope FZF --
  use {'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} }}
  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
- vim.cmd([[nmap <space>f <Cmd>Telescope find_files<CR>]])
+
 
  -- wakatime --
  use 'wakatime/vim-wakatime'
