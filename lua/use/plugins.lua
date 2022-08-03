@@ -1,6 +1,13 @@
+ -- Basic cmds --
+ vim.opt.termguicolors = true
+ vim.wo.fillchars='eob: '
+ vim.opt.number = true
+ vim.opt.relativenumber = true
+ vim.o.background = "dark"
+ vim.opt.list = true
+
+
 local fn = vim.fn
-
-
 -- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -48,11 +55,6 @@ return packer.startup(function(use)
  -- coc nvim --
  use {'neoclide/coc.nvim', branch = 'release'}
 
- -- LSP --
- use 'neovim/nvim-lspconfig'
- use 'williamboman/nvim-lsp-installer'
- use 'jose-elias-alvarez/null-ls.nvim'
-
  -- AutoPairs --
  use 'jiangmiao/auto-pairs'
  
@@ -61,7 +63,6 @@ return packer.startup(function(use)
 
  --AutoClose Tags HTMl
  use 'alvan/vim-closetag'
-
 
  --COLORSCHEMES
  -- Oceanic Next --
@@ -77,7 +78,6 @@ return packer.startup(function(use)
  -- srcery
  use 'srcery-colors/srcery-vim'
 
-
  -- rainbow parentheses--
  use 'luochen1990/rainbow'
  
@@ -85,7 +85,7 @@ return packer.startup(function(use)
  use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
  require("bufferline").setup{}
 
- --Feline--
+ --windline--
  use 'windwp/windline.nvim'
  
  -- ClangFormatAutoEnable
@@ -96,7 +96,7 @@ return packer.startup(function(use)
  -- Ruby --
  use 'vim-ruby/vim-ruby'
  use 'tpope/vim-rails'
- 
+
  -- G0 --
  use 'fatih/vim-go'
 
@@ -126,15 +126,26 @@ return packer.startup(function(use)
 	
  -- BlankLine --
  use "lukas-reineke/indent-blankline.nvim"
- 
- -- Basic cmds --
- vim.opt.termguicolors = true
- vim.wo.fillchars='eob: '
- vim.opt.number = true
- vim.opt.relativenumber = true
- vim.o.background = "dark"
- vim.opt.list = true
- 
- 
+
+ -- LSPLine
+ use({
+  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+  config = function()
+    require("lsp_lines").setup()
+  end,
+})
+
+-- Navic 
+use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+}
+
+--LspInstaller
+use "williamboman/nvim-lsp-installer"
+require("nvim-lsp-installer").setup {}
+use "jose-elias-alvarez/null-ls.nvim"
+use "neovim/nvim-lspconfig"
+
  vim.cmd([[colorscheme srcery]])
 end)
