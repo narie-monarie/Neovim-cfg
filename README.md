@@ -3,6 +3,5 @@
   
   `Install Packer.nvim`
   - run PackerInstall and all the plugins will be installed.
-
-# Issues
-- I couldnt get C# Language server running yet
+  
+  This is not the final config yet. Im on Emacs right now because of projects ill be back to finish this
